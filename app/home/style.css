@@ -1,32 +1,3 @@
-/* app/globals.css */
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-}
-
-h1, h2 {
-  color: #333;
-}
-
-button {
-  margin: 5px;
-  padding: 10px;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #005bb5;
-}
-
-label {
-  margin-right: 10px;
-}
-
 /* app/(home)/style.css */
 .container {
   display: flex;

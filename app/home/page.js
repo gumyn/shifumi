@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import './globals.css';
+import './style.css';
 
 const choices = ["pierre", "papier", "ciseaux"];
 const emojis = {
