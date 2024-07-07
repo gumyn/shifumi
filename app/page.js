@@ -83,31 +83,38 @@ export default function Home() {
     if (choices.every(choice => choice)) {
       handlePlay();
     }
+
+    // console.log(choices)
+    // console.log(scores)
   }, [choices]);
 
   return (
     <div>
-      <h1>Jeu de Shifumi Multi-joueurs</h1>
-      <label>
+      <label className="centered-div">
+        <h1>Jeu de Shifumi Multi-joueurs</h1>
         Nombre de joueurs:
-        <select value={numPlayers} onChange={(e) => {
-          const num = parseInt(e.target.value);
-          setNumPlayers(num);
-          setChoices(Array(num).fill(''));
-          setScores(Array(num).fill(0));
-        }}>
-          {[2, 3, 4].map(num => (
-            <option key={num} value={num}>{num}</option>
-          ))}
-        </select>
+        {["2", "3", "4"].map(option => (
+          <button key={option} onClick={(e) => {
+            const num = parseInt(e.target.textContent);
+            setNumPlayers(num);
+            setChoices(Array(num).fill(''));
+            setScores(Array(num).fill(0));
+            // console.log(num)
+          }}>
+            {option}
+          </button>
+        ))}
       </label>
 
       <div className="players">
+
+        
         {choices.map((choice, index) => (
-          <div key={index} className="player">
+          <div key={index} className={`player player-${index + 1}`}>
             <h2>Joueur {index + 1}</h2>
             <p>Score: {scores[index]}</p>
-            {choices[index] ? <p>{emojis[choices[index]]}</p> : (
+            
+            {choices[index] ? ( <div><button>{emojis[choices[index]]}</button></div> ) : (
               <div>
                 {["pierre", "papier", "ciseaux"].map(option => (
                   <button key={option} onClick={() => handleChoice(index, option)}>
@@ -118,6 +125,8 @@ export default function Home() {
             )}
           </div>
         ))}
+
+
       </div>
     </div>
   );
