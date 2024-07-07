@@ -6,10 +6,10 @@ body {
   padding: 20px;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: #333;
 }
-
 
 button:hover {
   background-color: #005bb5;
@@ -59,6 +59,31 @@ button:hover {
   background-color: #005bb5;
 }
 
+.topRight {
+  position: fixed; /* Fixe l'élément par rapport à la fenêtre de visualisation */
+  top: 0; /* Positionne l'élément en haut */
+  right: 0; /* Positionne l'élément à droite */
+  margin: 10px; /* Ajoute une marge pour l'espacement */
+  background-color: #fff; /* Optionnel: définit une couleur de fond pour mieux visualiser */
+  padding: 10px; /* Optionnel: ajoute un peu de padding */
+  border: 0px solid #000; /* Optionnel: ajoute une bordure pour mieux visualiser */
+}
+
+/* Styles pour agrandir le select et les options */
+.select-large {
+  font-size: 2rem; /* Augmente la taille de la police */
+  padding: 10px; /* Ajoute du padding pour agrandir la zone de sélection */
+  border: none; /* Retire la bordure */
+  outline: none; /* Retire l'outline pour un look plus propre */
+  background-color: #0070f3; /* Optionnel: définit une couleur de fond */
+  color: #fff; /* Optionnel: définit une couleur de fond pour mieux visualiser */
+  border-radius: 15px; /* Optionnel: ajoute un léger arrondi aux coins */
+}
+
+.option-large {
+  font-size: 2rem; /* Augmente la taille de la police pour les options */
+}
+
 .centered-div {
   position: absolute; /* Permet de positionner la div relativement au parent */
   top: 50%; /* Positionne la div à 50% du haut de l'écran */
@@ -97,6 +122,6 @@ button:hover {
 .player-4 {
   top: 50%;
   right: 0;
-  margin-right: 40px; 
+  margin-right: 40px;
   transform: translateY(-50%) rotate(270deg);
 }

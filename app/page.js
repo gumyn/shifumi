@@ -23,8 +23,8 @@ const getWinner = (choice1, choice2) => {
   return 1; // le second joueur gagne
 };
 
-const playMatches = (choices) => {
-  const numPlayers = choices.length;
+
+const playMatches = (choices, numPlayers) => {
   const results = Array(numPlayers).fill(0);
 
   for (let i = 0; i < numPlayers; i++) {
@@ -32,7 +32,7 @@ const playMatches = (choices) => {
     const rightIndex = (i + 1) % numPlayers;
 
     // Jouer contre le joueur à gauche
-    const leftResult = getWinner(choices[i], choices[leftIndex]);
+    const leftResult = getWinner(choices[i][0][0], choices[leftIndex][1][1]);
     if (leftResult === 0) {
       results[i] += 1;
     } else if (leftResult === 1) {
@@ -40,7 +40,7 @@ const playMatches = (choices) => {
     }
 
     // Jouer contre le joueur à droite
-    const rightResult = getWinner(choices[i], choices[rightIndex]);
+    const rightResult = getWinner(choices[i][1][0], choices[rightIndex][0][1]);
     if (rightResult === 0) {
       results[i] += 1;
     } else if (rightResult === 1) {
@@ -53,10 +53,10 @@ const playMatches = (choices) => {
 
 export default function Home() {
   const [numPlayers, setNumPlayers] = useState(2);
-  const [choices, setChoices] = useState(Array(numPlayers).fill(''));
+  const [choices, setChoices] = useState(Array(numPlayers).fill(Array(2).fill(["", ""])));
   const [scores, setScores] = useState(Array(numPlayers).fill(0));
   const [round, setRound] = useState(1);
-
+  
   const handleChoice = (playerIndex, choice) => {
     const newChoices = [...choices];
     newChoices[playerIndex] = choice;
@@ -75,7 +75,7 @@ export default function Home() {
       alert(`Le joueur ${winnerIndex + 1} a gagné!`);
       setScores(Array(numPlayers).fill(0));
     }
-    setChoices(Array(numPlayers).fill(''));
+    setChoices(Array(numPlayers).fill(Array(2).fill(["", ""])));
     setRound(round + 1);
   };
 
@@ -84,13 +84,14 @@ export default function Home() {
       handlePlay();
     }
 
-    // console.log(choices)
-    // console.log(scores)
+    console.log("----------------------")
+    console.log("choices",choices)
+    console.log("scores",scores)
   }, [choices]);
 
   return (
     <div>
-      <label className="centered-div">
+      {/* <label className="centered-div">
         <h1>Jeu de Shifumi Multi-joueurs</h1>
         Nombre de joueurs:
         {["2", "3", "4"].map(option => (
@@ -104,17 +105,30 @@ export default function Home() {
             {option}
           </button>
         ))}
-      </label>
+      </label> */}
+
+      <div className="topRight">
+        <select className="select-large" value={numPlayers} onChange={(e) => {
+          const num = parseInt(e.target.value);
+          setNumPlayers(num);
+          setChoices(Array(num).fill(''));
+          setScores(Array(num).fill(0));
+        }}>
+          {[2, 3, 4].map(num => (
+            <option className="option-large" key={num} value={num}>{num}</option>
+          ))}
+        </select>
+      </div>
 
       <div className="players">
 
-        
+
         {choices.map((choice, index) => (
           <div key={index} className={`player player-${index + 1}`}>
             <h2>Joueur {index + 1}</h2>
             <p>Score: {scores[index]}</p>
-            
-            {choices[index] ? ( <div><button>{emojis[choices[index]]}</button></div> ) : (
+
+            {choices[index] ? (<div><button>{emojis[choices[index]]}</button></div>) : (
               <div>
                 {["pierre", "papier", "ciseaux"].map(option => (
                   <button key={option} onClick={() => handleChoice(index, option)}>
